@@ -1,141 +1,318 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Development of a Friend Recommendation System</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекомендательная система друзей | Ха Анастасия</title>
+    <style>
+        /* Базовые стили для всего документа */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Контейнер для центрирования контента */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Заголовки секций */
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        /* Шапка сайта (Header) */
+        header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Навигационное меню */
+        nav {
+            background: #2c3e50;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background: #3498db;
+        }
+
+        /* Секции */
+        section {
+            padding: 4rem 0;
+            background: white;
+            margin: 1rem 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        section .container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.is-visible .container {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Секция "О проекте" */
+        #about {
+            background: #fff;
+        }
+
+        /* Блоки с целями и задачами */
+        .card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #3498db;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Секция "Анализ области" */
+        #analysis ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+
+        /* Секция "Алгоритм" */
+        #algorithm {
+            background: #eaf2f8;
+        }
+        .algorithm-step {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 5px;
+        }
+
+        /* Псевдокод */
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            overflow-x: auto;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Подвал сайта (Footer) */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li a {
+                padding: 0.8rem;
+                text-align: center;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1>Development of a Friend Recommendation System in a Social Network</h1>
-      <p class="author">Prepared by: <strong>Kha Anastasiia</strong></p>
-      <nav class="nav">
-        <a href="#introduction">Introduction</a>
-        <a href="#relevance">Relevance</a>
-        <a href="#goals">Goals</a>
-        <a href="#objectives">Objectives</a>
-        <a href="#analysis">Domain Analysis</a>
-        <a href="#types">Types</a>
-        <a href="#methods">Methods</a>
-        <a href="#criteria">Criteria</a>
-        <a href="#features">Proposed Features</a>
-        <a href="#conclusion">Conclusion</a>
-      </nav>
-    </div>
-  </header>
+    <!-- Шапка с названием -->
+    <header id="home">
+        <div class="container">
+            <h1>Разработка системы рекомендации друзей в социальной сети</h1>
+            <p>Исследовательский проект по улучшению алгоритмов поиска и рекомендаций</p>
+            <p><strong>Выполнила:</strong> Ха Анастасия</p>
+        </div>
+    </header>
 
-  <main class="container">
-    <section id="introduction" class="card">
-      <h2>Introduction</h2>
-      <p>The purpose of this website is to present my work on developing a friend recommendation system for the VK social network (a popular platform in Russia) and to contribute to the discussion on improving user experience in digital platforms.</p>
-      <p>The project code is available on GitHub: 
-        <a href="https://github.com/NastyaKha/friend-recommendation-system" target="_blank">
-          https://github.com/NastyaKha/friend-recommendation-system
-        </a>
-      </p>
+    <!-- Навигационное меню -->
+    <nav>
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#about">Актуальность и цели</a></li>
+            <li><a href="#analysis">Анализ области</a></li>
+            <li><a href="#algorithm">Предлагаемый алгоритм</a></li>
+        </ul>
+    </nav>
+
+    <!-- Секция "О проекте" -->
+    <section id="about">
+        <div class="container">
+            <h2>Актуальность проекта</h2>
+            <p>Социальная сеть Вконтакте очень популярна и в ней зарегистрировано большое количество людей. Это большая площадка для общения, но самая главная проблема - это подобрать контингент для общения. Хотя платформа уже имеет рекомендательную систему, но она не совершенна.</p>
+
+            <h3>Проблема существующих систем</h3>
+            <p>Основная настройка существующих систем - искать друзей по общим знакомым или включать фильтрацию по общим признакам. Но это не всегда помогает для нахождения друзей или знакомых.</p>
+
+            <div class="card">
+                <h3>Цель работы</h3>
+                <p>Выявить недостатки рекомендательной системы друзей в социальной сети Вконтакте и разработать более оптимальный алгоритм для нахождения знакомых и новых знакомств.</p>
+            </div>
+
+            <div class="card">
+                <h3>Задачи проекта</h3>
+                <ol>
+                    <li>Рассмотреть принцип работы существующей системы</li>
+                    <li>Выявить ситуации, которые не рассматривает система</li>
+                    <li>Составить алгоритм фильтрации и рассмотреть наиболее оптимальный тип рекомендательной системы для отбора</li>
+                </ol>
+            </div>
+        </div>
     </section>
 
-    <section id="relevance" class="card">
-      <h2>Relevance of Developing a Friend Recommendation System</h2>
-      <p>VK is one of the most popular social networks with millions of users. It is a large communication platform, but its main problem is selecting the right circle of contacts.</p>
-      <p>Although VK already has a recommendation system, it is not perfect. Its primary settings include search by mutual acquaintances and basic attribute filters, which do not always help locate a specific person.</p>
-      <h3>Common cases that current systems miss</h3>
-      <ul>
-        <li>Your acquaintance did not attend the same school and you do not remember its name.</li>
-        <li>You don’t know their exact place of residence.</li>
-        <li>You forgot their last name or they have changed it.</li>
-        <li>You don’t know their workplace or they are unemployed.</li>
-        <li>You have no mutual acquaintances.</li>
-      </ul>
-      <p><em>In such cases, finding the right person becomes nearly impossible — even if you spent hours talking about your favorite music together.</em></p>
+    <!-- Секция "Анализ области" -->
+    <section id="analysis">
+        <div class="container">
+            <h2>Анализ предметной области</h2>
+            <p>Система рекомендаций друзей - это автоматизированная система, которая предлагает потенциальных друзей пользователям социальных сетей.</p>
+
+            <h3>Где используются такие системы?</h3>
+            <ul>
+                <li>Facebook</li>
+                <li>Instagram</li>
+                <li>LinkedIn</li>
+                <li>Вконтакте</li>
+                <li>Одноклассники</li>
+            </ul>
+
+            <p>Система рекомендаций - это система, которая используется для рекомендации ресурсов, которые могут быть интересны пользователю, исходя из интересов и/или предпочтений пользователей.</p>
+        </div>
     </section>
 
-    <section id="goals" class="card">
-      <h2>Goals</h2>
-      <ul>
-        <li>Identify the shortcomings of the current friend recommendation system in VK.</li>
-        <li>Propose a more optimized algorithm for finding acquaintances and new connections.</li>
-      </ul>
+    <!-- Секция "Алгоритм" -->
+    <section id="algorithm">
+        <div class="container">
+            <h2>Предлагаемый алгоритм</h2>
+            <p>Для улучшения рекомендаций предлагается использовать гибридный подход, сочетающий анализ контента и коллаборативную фильтрацию.</p>
+
+            <div class="algorithm-step">
+                <h3>Шаг 1: Сбор данных о пользователе</h3>
+                <p>Анализируются интересы, группы, музыкальные предпочтения, места посещения и другие активность пользователя.</p>
+            </div>
+
+            <div class="algorithm-step">
+                <h3>Шаг 2: Векторизация признаков</h3>
+                <p>Создание векторных представлений пользователей на основе их интересов и активности.</p>
+                <pre>
+// Псевдокод для векторизации пользователя
+function vectorizeUser(user) {
+  vector = [];
+  vector.push(user.musicPreferences);   // Музыкальные предпочтения
+  vector.push(user.groupAffiliations);  // Участие в группах
+  vector.push(user.interests);          // Список интересов
+  vector.push(user.geoData);            // Географические данные
+  return normalize(vector);             // Нормализация вектора
+}
+                </pre>
+            </div>
+
+            <div class="algorithm-step">
+                <h3>Шаг 3: Поиск похожих пользователей</h3>
+                <p>Использование косинусного сходства для нахождения пользователей с близкими векторами признаков.</p>
+                <pre>
+// Псевдокод расчета косинусного сходства
+function cosineSimilarity(vecA, vecB) {
+  dotProduct = 0;
+  magnitudeA = 0;
+  magnitudeB = 0;
+  
+  for (i = 0; i < vecA.length; i++) {
+    dotProduct += vecA[i] * vecB[i];
+    magnitudeA += vecA[i] * vecA[i];
+    magnitudeB += vecB[i] * vecB[i];
+  }
+  
+  magnitudeA = sqrt(magnitudeA);
+  magnitudeB = sqrt(magnitudeB);
+  
+  return dotProduct / (magnitudeA * magnitudeB);
+}
+                </pre>
+            </div>
+
+            <div class="algorithm-step">
+                <h3>Шаг 4: Ранжирование и выдача результатов</h3>
+                <p>Ранжирование потенциальных друзей по степени сходства и выдача персональных рекомендаций.</p>
+            </div>
+        </div>
     </section>
 
-    <section id="objectives" class="card">
-      <h2>Objectives</h2>
-      <ul>
-        <li>Review the principles of the existing system.</li>
-        <li>Identify situations not considered by the current system.</li>
-        <li>Develop a filtering algorithm and define the most suitable type of recommendation system.</li>
-      </ul>
-    </section>
+    <!-- Подвал сайта -->
+    <footer>
+        <div class="container">
+            <p>© 2023 Разработка системы рекомендации друзей в социальной сети</p>
+            <p>Автор: Ха Анастасия</p>
+        </div>
+    </footer>
 
-    <section id="analysis" class="card">
-      <h2>Domain Analysis</h2>
-      <p>A <strong>friend recommendation system</strong> automatically suggests potential friends to users. Many social networks such as Facebook, Instagram, LinkedIn, VK and others use these systems to improve user engagement.</p>
-      <p>Recommendation systems suggest resources of interest based on user behavior and preferences; different approaches and technologies are applied depending on requirements.</p>
-    </section>
-
-    <section id="types" class="card">
-      <h2>Types of Recommendation Systems</h2>
-      <ol>
-        <li><strong>Content-based filtering</strong> – predicting connections from user activity history (groups, likes, visited profiles).</li>
-        <li><strong>Collaborative filtering</strong> – user-based (UBCF) and item-based (IBCF) approaches relying on similarity metrics.</li>
-        <li><strong>Knowledge-based filtering</strong> – explicit criteria (gender, genres, communities, games).</li>
-        <li><strong>Hybrid filtering</strong> – combining multiple approaches to compensate for weaknesses.</li>
-      </ol>
-    </section>
-
-    <section id="methods" class="card">
-      <h2>Applied Methods</h2>
-      <ul>
-        <li>Method 1: Based on lifestyle and shared interests.</li>
-        <li>Method 2: Based on real-time location and user interests.</li>
-      </ul>
-    </section>
-
-    <section id="criteria" class="card">
-      <h2>Criteria</h2>
-      <p>The system aims to offer both acquaintance-finding and new-connection discovery.</p>
-      <ol>
-        <li>Include many filtering options (interests, music, games, communities).</li>
-        <li>Verify user activity levels to prioritize real accounts.</li>
-        <li>Ensure simplicity of use.</li>
-        <li>Enable extended search options for premium users.</li>
-      </ol>
-    </section>
-
-    <section id="features" class="card">
-      <h2>Proposed Features</h2>
-      <ul>
-        <li>Search by groups, games, videos, and music interests.</li>
-        <li>Prioritize active users in rankings.</li>
-        <li>Suggest connections based on shared lifestyle or hobbies.</li>
-        <li>Introduce gamification (friend challenges and rewards).</li>
-      </ul>
-    </section>
-
-    <section id="conclusion" class="card">
-      <h2>Conclusion</h2>
-      <p>This project demonstrates the importance of improving friend recommendation systems in modern social networks. By analyzing existing approaches and proposing new filtering criteria, it aims to enhance user experience and make finding friends and like-minded people more effective.</p>
-      <p><strong>Full project and implementation on GitHub:</strong> 
-        <a href="https://github.com/NastyaKha/friend-recommendation-system" target="_blank">
-          https://github.com/NastyaKha/friend-recommendation-system
-        </a>
-      </p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>The purpose of this website is to share my work on a friend recommendation system and to contribute to the discussion on improving user experience in digital platforms.</p>
-      <p>GitHub: 
-        <a href="https://github.com/NastyaKha/friend-recommendation-system" target="_blank">
-          https://github.com/NastyaKha/friend-recommendation-system
-        </a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+    <!-- Простой JavaScript для анимации появления секций -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
